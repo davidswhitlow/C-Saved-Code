@@ -1,2 +1,0 @@
-Serious Cryptography: A Practical Introduction to Modern Encryption 
-Jean-Philippe Aumasson
