@@ -1,0 +1,70 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            Player[] GamePlayers = new Player[100];
+            int PlayerIndex = 0;
+            string Bodypath = "C:\\C# Test\\OutData.txt";
+            int x = 0;
+            string AcctNo = string.Empty;
+            string Lastname = string.Empty;
+            string Firstname = string.Empty;
+            int Points = 0;
+            int Total = 0;
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\AccountData.txt");
+            foreach (string line in Inputtext)
+            {
+                AcctNo = line.Substring(0, 5);
+                Lastname = line.Substring(7, 12);
+               
+                Firstname = line.Substring(19, 10);
+                Points = int.Parse(line.Substring(30, 6));
+                Player p1 = new Player(AcctNo, Firstname, Lastname, Points);
+                PlayerIndex++;
+                GamePlayers[PlayerIndex] = p1;
+                Total += Points;
+                x++;
+                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine("Account No: {0}", AcctNo);
+                Console.WriteLine("Name: {0},{1}", Lastname.Trim(), Firstname);
+                Console.WriteLine("Point balance: {0}", Points);
+            }
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine(" ");
+            Console.WriteLine("Total Points:  {0}", Total);  
+            string fmt = "0#####";
+            for (int y = 1; y < PlayerIndex + 1; y++)
+            {
+                Console.WriteLine("Account No:  {0}  Name: {1}  Points: {2}", GamePlayers[y].PlayerAccountNumber, GamePlayers[y].PlayerLastName + ',' + GamePlayers[y].PlayerFirstName, GamePlayers[y].PlayerPoints);
+                string outval = GamePlayers[y].PlayerPoints.ToString(fmt);
+                string Appendline = GamePlayers[y].PlayerAccountNumber + "  " + GamePlayers[y].PlayerLastName + GamePlayers[y].PlayerFirstName + " " + outval + '\n';
+                System.IO.File.AppendAllText(Bodypath, Appendline);
+            }
+
+
+            //string Appendline = "INSERT INTO TITLE (PoemId,TitleText)" + '\n';
+            //System.IO.File.AppendAllText(Bodypath, Appendline);
+            
+        }
+    
+
+       
+    }
+    
+     public class Player
+    {
+        public string PlayerAccountNumber { set; get; }
+        public string PlayerLastName { set; get; }
+        public string PlayerFirstName { set; get; }
+        public int PlayerPoints { set; get; }
+        
+        public Player (string an, string fn, string ln, int pb)
+        {
+            PlayerAccountNumber = an;
+            PlayerLastName = ln;
+            PlayerFirstName = fn;
+            PlayerPoints = pb;
+        }
+    }
+    

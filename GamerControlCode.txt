@@ -1,0 +1,65 @@
+ class Program
+    {
+        bool Quit = false;
+        static void Fire()
+        {
+            Console.WriteLine("FIRE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            return;
+        }
+        static void PlayerUp()
+        {
+            Console.WriteLine("UP");
+            return;
+        }
+        static void PlayerDown()
+        {
+            Console.WriteLine("DOWN");
+            return;
+        }
+        static void PlayerLeft()
+        {
+            Console.WriteLine("LEFT");
+            return;
+        }
+        static void PlayerRight()
+        {
+            Console.WriteLine("RIGHT");
+            return;
+        }
+        static void Main(string[] args)
+        {
+            bool Quit = false;
+
+            do
+            {
+                char day = Console.ReadKey(true).KeyChar;
+                switch (day)
+                {
+                    case ' ':
+                        Fire();
+                        break;
+                    case 'w':
+                        PlayerUp();
+                        break;
+                    case 'a':
+                        PlayerLeft();
+                        break;
+                    case 's':
+                        PlayerRight();
+                        break;
+                    case 'z':
+                        PlayerDown();
+                        break;
+                    case 'q':
+                        Quit = true;
+                        break;
+                    default:
+                        Console.WriteLine("?");
+                        break;
+
+                }
+            } while (!Quit);
+             
+         } 
+       
+    }

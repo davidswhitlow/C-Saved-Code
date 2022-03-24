@@ -1,0 +1,6 @@
+File.WriteAllLines("Filename.txt,Listname);
+
+
+
+var surveyResults = JsonConvert.DeserializeObject<SurveyResults>
+                    (File.ReadAllText($"data/{selectedData}.json"));

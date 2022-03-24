@@ -1,0 +1,45 @@
+class Program
+    {
+
+        
+        static void Main(string[] args)
+        {
+
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C#Test\ST.txt");
+            string[] Screen = new string[40];
+            int Screenindex = 0;
+            int col = 0;
+            int row = 0;
+            int Fieldindex = 0;
+            int[] Fieldcol = new int[20];
+            int[] Fieldrow = new int[20];
+            foreach (string line in Inputtext)
+            {
+                Screenindex++;
+                Screen[Screenindex] = line;
+                row++;
+                for (int g = 0; g < line.Length; g++)
+                {
+                    if (line.Substring(g,1)==":")
+                    {
+                        Fieldindex++;
+                        Fieldcol[Fieldindex] = g + 3;
+                        Fieldrow[Fieldindex] = row;
+                    }
+                }
+
+            }
+            Console.Clear();
+            for (int q = 1; q < Screenindex + 1; q++)
+            {
+                Console.SetCursorPosition(1, q);
+                Console.WriteLine(Screen[q]);
+            }
+            for (int y = 1; y < Fieldindex +1; y++)
+            {
+                Console.SetCursorPosition(Fieldcol[y], Fieldrow[y]);
+                Console.WriteLine("Data{0}",y);
+            }
+
+
+        }

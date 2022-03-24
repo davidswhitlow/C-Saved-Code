@@ -1,0 +1,67 @@
+using System;
+
+namespace MyFirstProgram
+{
+    class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            int UpperBound = 10000;
+            Random rand = new Random();
+            int Answer = rand.Next(1,UpperBound);
+            //Console.WriteLine(Answer);
+            bool Correct = false;
+            int UpperLimit = UpperBound;
+            int LowerLimit = 0;
+            int Guess = 0;
+            int GuessNumber = 0;
+            do
+            {
+                GuessNumber++;
+                Guess = GetNum(LowerLimit, UpperLimit, GuessNumber);
+              if (Guess == Answer)
+                {
+                    Console.WriteLine("****  Correct *****");
+                    Correct = true;
+                } else
+                {
+                    if (Guess > Answer)
+                    {
+                        Console.WriteLine("Lower...");
+                        UpperLimit = Guess;
+                    }  else
+                    {
+                        Console.WriteLine("Higher...");
+                        LowerLimit = Guess;
+                    }
+                }
+
+            } while (!Correct);
+
+          
+        }
+        public static int GetNum(int Ll,int Ul,int Gn)
+        {
+            bool Goodnum = false;
+            int Value = 0;
+            do
+            {
+                Console.Write("Guess # {2} - Enter integer value between {0} and {1}: ",Ll,Ul,Gn);
+                Goodnum = Int32.TryParse(Console.ReadLine(), out Value);
+                if (!Goodnum)
+                {
+                    Console.WriteLine("Bad Value....try again.\n");
+                }
+                else
+                {
+                    if (Value < Ll || Value > Ul)
+                    {
+                        Console.WriteLine("Value must be in-between {0} and {1}", Ll, Ul);
+                        Goodnum = false;
+                    }
+                }
+            } while (!Goodnum);
+            return Value;
+        }
+    }
+}

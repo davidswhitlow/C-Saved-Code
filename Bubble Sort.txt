@@ -1,0 +1,36 @@
+static void Main(string[] args)
+        {
+            int x = 1;
+            int[] Iarray = new int[20];
+            int IIndex = 0;
+            while (x > 0)
+            {
+                string xs = Console.ReadLine();
+                x = int.Parse(xs);
+                if (x > 0)
+                {
+                    IIndex++; 
+                    Iarray[IIndex] = x;
+                }
+            }
+            for (int g = 1; g < IIndex + 1; g++)
+            {
+                Console.WriteLine("Array element {0} is {1}", g, Iarray[g]);
+            }
+            for (int a = 1; a < IIndex + 1; a++)
+            {
+                for (int b = 1; b < IIndex; b++)
+                {
+                    if(Iarray[b] > Iarray[b+1]) {
+                        int hold = Iarray[b];
+                        Iarray[b] = Iarray[b + 1];
+                        Iarray[b + 1] = hold;
+                    }
+                }
+            }
+            Console.WriteLine("Sorted Array....");
+            for (int g = 1; g < IIndex + 1; g++)
+            {
+                Console.WriteLine("Array element {0} is {1}", g, Iarray[g]);
+            }
+        }

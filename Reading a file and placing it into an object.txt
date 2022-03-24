@@ -1,0 +1,86 @@
+using System;
+
+namespace ConsoleApp11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Supplier[] Sarray = new Supplier[100];
+            int sindex = 0;
+            string SupplierId = string.Empty;
+            string SupplierName = string.Empty;
+            string Contact = string.Empty;
+            string Title = string.Empty;
+            string City = string.Empty;
+            string Address = string.Empty;
+            string Region = string.Empty;
+            string PhoneNo = string.Empty;
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\Supplier.txt");
+            foreach (string s in Inputtext)
+            {
+                /*
+                Console.WriteLine(".........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6");
+                Console.WriteLine(s);
+                */
+                SupplierId = s.Substring(0, 3);
+                SupplierName = s.Substring(5, 51);
+                Contact = s.Substring(56, 45);
+                Title = s.Substring(107, 41);
+                Address = s.Substring(148, 51);
+                City = s.Substring(199, 21);
+                Region = s.Substring(220, 16);
+                PhoneNo = s.Substring(236, 16);
+                /*
+                Console.WriteLine("  SupplierID: {0}", SupplierId);
+                Console.WriteLine("SupplierName: {0}", SupplierName);
+                Console.WriteLine("     Contact: {0}", Contact);
+                Console.WriteLine("       Title: {0}", Title);
+                Console.WriteLine("     Address: {0}", Address);
+                Console.WriteLine("        City: {0}", City);
+                Console.WriteLine("      Region: {0}", Region);
+                Console.WriteLine("     PhoneNo: {0}", PhoneNo);
+                Console.WriteLine(" ");
+                */
+                Sarray[sindex] = new Supplier(SupplierId, SupplierName, Contact, Title, Address, City, Region, PhoneNo);
+                sindex++;
+            }
+            for (int x=0; x<sindex;x++)
+            {
+                Console.WriteLine("{0}", Sarray[x].MailingLabel);
+            }
+        }
+    }
+    
+    public class Supplier
+    {
+        public Supplier (string supplierid, string suppliername, string contact, string title, string address, string city, string region, string phoneno)
+        {
+            SupplierId = supplierid;
+            SupplierName = suppliername;
+            Contact = contact;
+            Title = title;
+            Address = address;
+            City = city;
+            Region = region;
+            PhoneNo = phoneno;
+        }
+        public string SupplierId { set; get; }
+        public string SupplierName { set; get; }
+        public string Contact { set; get; }
+        public string Title { set; get; }
+        public string Address { set; get; }
+        public string City { set; get; }
+        public string Region { set; get; }
+        public string PhoneNo { set; get; }
+        public string MailingLabel
+        {
+            get
+            {
+                string ml = SupplierName + '\n' + "CO: " + Contact + '\n' + Address + '\n' + City + '\n' + Region;
+                return ml;
+            }
+        }
+
+    }
+}

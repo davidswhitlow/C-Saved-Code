@@ -1,0 +1,105 @@
+using System;
+using System.IO;
+
+namespace C_Sharp_Strings
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+         
+            string[] InputFile = File.ReadAllLines(@"C:\C#Test\Emp.txt");
+            int x;
+            int TotalYears = 0;
+            int NumEmployees = 0;
+            decimal AvgAge = 0;
+            int MarriedMales = 0;
+            int SingleMales = 0;
+            int MarriedFemales = 0;
+            int SingleFemales = 0;
+
+            /*    Main Read Loop         */
+
+            for (x = 0; x < InputFile.Length - 1; x++)
+            {
+                string Position = InputFile[x].Substring(0, 51);
+                string IDob = InputFile[x].Substring(51, 10);
+                string MaritalStatus = InputFile[x].Substring(62, 1);
+                string Gender = InputFile[x].Substring(76, 1);
+                string FDob = FormatDate(IDob);
+                string PrintGender = String.Empty;
+                string PrintMaritalStatus = String.Empty;
+                int Age = GetAge(FDob);
+                string Odate = string.Empty;
+                
+                /* Set Print Gender Field */
+
+                if (Gender == "M") { PrintGender = "Male  "; }   else
+                                   { PrintGender = "Female"; }
+                
+                /* Set Marital Status Field */
+                
+                if (MaritalStatus == "M") { PrintMaritalStatus = "Married"; }   else
+                                          { PrintMaritalStatus = "Single "; }
+                
+                /* Accumulate Gender/Marital Status Counts */
+                
+                if (Gender == "M")
+                {
+                    if (MaritalStatus == "M") { MarriedMales++; }   else
+                                              { SingleMales++;  }
+                } else
+                {
+                    if (MaritalStatus == "M") { MarriedFemales++; }   else
+                                              { SingleFemales++;  }
+                }
+
+                Odate = FormatOutputDate(FDob);
+
+                /* Write Detail Record */
+
+                Console.WriteLine("{0} - {1} - {2} - {3} - {4} - {5} - {6}", Position, IDob, FDob, Age, PrintGender, PrintMaritalStatus,Odate.PadLeft(17));
+                TotalYears += Age;
+                NumEmployees++;
+            }
+
+            /* Write Totals */
+            
+            AvgAge = Convert.ToDecimal(TotalYears) / Convert.ToDecimal(NumEmployees);
+            Console.WriteLine("Total Combined Age of Workforce: {0}    Average Age: {1}", TotalYears, String.Format("{0:0.##}",AvgAge));
+            Console.WriteLine("Total Employees: {0}", NumEmployees);
+            Console.WriteLine("Males   -          Single: {0}       Married: {1}", MarriedMales, SingleMales);
+            Console.WriteLine("Females -          Single: {0}       Married: {1}", MarriedFemales, SingleFemales);
+        }
+       
+        /* Converts Input File Date to Standardized Format */
+        static string FormatDate(string dt)
+       {
+           string fdt = dt.Substring(0, 4) + dt.Substring(5, 2) + dt.Substring(8,2);
+           return fdt;
+       }  
+       
+        /* Uses input file DOB to determine age */
+        static int GetAge(string dt)
+       {
+          string CurDate = DateTime.UtcNow.ToString("yyyyMMdd");
+          int CurYear = Int16.Parse(CurDate.Substring(0, 4));
+          int CurMD = Int16.Parse(CurDate.Substring(4, 4));
+          int BYear = Int16.Parse(dt.Substring(0, 4));
+          int BMD = Int16.Parse(dt.Substring(4, 4));
+          int Age = CurYear - BYear;
+          if (BMD > CurMD)
+          {
+              Age--;
+          }
+          return Age;
+       }
+       static string FormatOutputDate(string dt)
+        {
+            string[] Months = { "  ", "January", "February" , "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            int m = Int16.Parse(dt.Substring(4, 2));
+            string odt = Months[m] + " " + dt.Substring(6, 2) + ',' + dt.Substring(0, 4);
+            return odt;
+        }
+    }
+}

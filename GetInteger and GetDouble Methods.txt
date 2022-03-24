@@ -1,0 +1,38 @@
+public static int GetInteger(int row, int column, string prompt)
+        {
+            int OutInteger = 0;
+            bool Goodnum = false;
+            string LPrompt = prompt + "              ";
+            do
+            {
+              Console.SetCursorPosition(row, column);
+              Console.Write(prompt);
+              Goodnum = Int32.TryParse(Console.ReadLine(), out OutInteger);
+              if (!Goodnum)
+                {
+                    int xRow = row + prompt.Length;
+                    Console.SetCursorPosition(xRow, column);
+                    Console.Write("           ");
+                }
+            } while (!Goodnum);
+            return OutInteger;
+        }
+        public static double GetDouble(int row, int column, string prompt)
+        {
+            double OutDouble = 0;
+            bool Goodnum = false;
+            string LPrompt = prompt + "              ";
+            do
+            {
+                Console.SetCursorPosition(row, column);
+                Console.Write(prompt);
+                Goodnum = double.TryParse(Console.ReadLine(), out OutDouble);
+                if (!Goodnum)
+                {
+                    int xRow = row + prompt.Length;
+                    Console.SetCursorPosition(xRow, column);
+                    Console.Write("           ");
+                }
+            } while (!Goodnum);
+            return OutDouble;
+        }

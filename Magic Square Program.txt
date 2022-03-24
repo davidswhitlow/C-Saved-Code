@@ -1,0 +1,151 @@
+// Magic Square Generation Program
+//
+// This programs allows for the input of an odd numbered dimension (X) and produces an
+// X by X Magic Square along with the cross sums of it's rows, columns and diagonals
+// 
+
+// Definitions
+
+int Asize = GetArraySize();
+int Lsize = Asize + 1;
+int[,] Ary = new int[Asize + 1, Asize + 1];
+int[] Totx = new int[Asize + 1];
+int[] Toty = new int[Asize + 1];
+int CrossSum1 = 0;
+int CrossSum2 = 0;
+
+//Initialize Array
+
+for (int x = 1; x < Lsize; x++)
+{
+    for (int y =1; y < Lsize; y++)
+    {
+        // Console.WriteLine("x: {0}  y: {1} ",x.ToString(), y.ToString());
+        Ary[x, y] = 0;
+    }
+}
+
+// Populate Array
+
+int hpx = 0;
+int hpy = 0;
+int py = (Asize + 1) /2;
+int px = Asize;
+Ary[px, py] = 1;
+for (int val = 2; val < ((Asize * Asize) + 1); val++)
+{
+    hpx = px + 1;
+    if (hpx > Asize) { hpx = hpx - Asize; }
+    hpy = py - 1;
+    if (hpy < 1) { hpy = Asize; }
+    if (Ary[hpx, hpy] == 0)
+    {
+        Ary[hpx, hpy] = val;
+        px = hpx;
+        py = hpy;
+    }   else
+    {
+        hpx = px -1;
+        hpy = py;
+        if (hpy > Asize) { hpy = hpy - Asize; }
+        Ary[hpx, hpy] = val;
+        px = hpx;
+        py = hpy;
+    }
+
+}
+
+// Print Array
+
+Console.WriteLine("\n\n\n\n");
+Console.WriteLine("{0} By {0} Magic Square:\n\n", Asize, Asize);
+for (int a = 1; a < Lsize; a++)
+{
+    for (int b = 1; b < Lsize; b++)
+    {
+        Console.Write("{0, -6}", Ary[a, b].ToString());
+    }
+    Console.Write("\n");
+}
+Console.WriteLine("\n\n\n\n\n");
+
+// Compute and print cross sums (including diagonals)
+
+Console.WriteLine("\n\nCross sums (Rows):\n\n");
+
+for (int a = 1; a < Lsize; a++)
+{
+    for (int b = 1; b < Lsize; b++ )
+    {
+        Console.Write("{0, -4}  ", Ary[a, b].ToString());
+        Toty[a] += Ary[a, b];
+    }
+    Console.Write("= ");
+    Console.Write(Toty[a]);
+    Console.Write("\n");
+}
+
+Console.WriteLine("\n\nCross sums (Columns):\n\n");
+
+for (int b = 1; b < Lsize; b++)
+{
+    for (int a = 1; a < Lsize; a++)
+    {
+        Console.Write("{0, -4}  ",Ary[a,b].ToString());
+        Totx[b] += Ary[a, b];
+    }
+    Console.Write("= ");
+    Console.Write(Totx[b]);
+    Console.Write("\n");
+}
+
+Console.WriteLine("\n\nCross sums (Diagonals):\n\n");
+
+for (int x =1; x < Lsize; x++)
+{
+    Console.Write("{0, -4}  ",Ary[x, x].ToString());
+    CrossSum1 += Ary[x, x];
+}
+Console.Write("= ");
+Console.Write(CrossSum1);
+Console.Write("\n");
+
+for (int x = 1; x < Lsize; x++)
+{
+    Console.Write("{0, -4}  ",Ary[x, Lsize - x].ToString());
+    CrossSum2 += Ary[x, Lsize - x];
+}
+Console.Write("= ");
+Console.Write(CrossSum2);
+Console.Write("\n");
+
+// Method to allow only odd number integer input
+
+static int GetArraySize()
+{
+    bool Goodnum = false;
+    int g = 0;
+    do
+    {
+        Console.WriteLine("Enter array size (must be an odd number):");
+        Goodnum = Int32.TryParse(Console.ReadLine(), out g);
+        if (!Goodnum)
+        {
+            Console.WriteLine("Invalid value....");
+        }
+        else
+        {
+            if (g % 2 == 0)
+            {
+                Console.WriteLine("Value must be an odd number");
+                Goodnum = false;
+            }
+            else
+            {
+                Goodnum = true;
+            }
+        }
+
+    } while (!Goodnum);
+    return g;
+}

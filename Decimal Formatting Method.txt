@@ -1,0 +1,35 @@
+using System;
+namespace ConsoleApp3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            decimal Num1 = 12342.4599m;
+            decimal Num2 = 23.45m;
+            decimal Num3 = 145.63224m;
+            string Snum1 = FormatDecimal(Num1, 25);
+            string Snum2 = FormatDecimal(Num2, 25);
+            string Snum3 = FormatDecimal(Num3, 25);
+
+            /* string StringNum = String.Format("{0:C2}", Num + 0.005m);
+            string StringNum1 = String.Format("{0:F2}", Num1 + 0.005m);
+            string StringNum2 = String.Format("{0:F2}", Num2 + 0.005m);
+            string StringNum3 = String.Format("{0:F2}", Num3 + 0.005m);
+            StringNum1 = new string(' ', 8-StringNum1.Length) + StringNum1;
+            StringNum2 = new string(' ', 8 - StringNum2.Length) + StringNum2;
+            StringNum3 = new string(' ', 8 - StringNum3.Length) + StringNum3; */
+            string Msg = "Hello";
+            Console.WriteLine("{0}  {1}", Snum1, Msg);
+            Console.WriteLine("{0}  {1}", Snum2, Msg);
+            Console.WriteLine("{0}  {1}", Snum3, Msg);
+
+        }
+        static string FormatDecimal(decimal number, int length )
+        {
+            string s1 = String.Format("{0:F2}", number + 0.005m);
+            s1 = new string(' ', length - s1.Length) + s1;
+            return s1;
+        }
+    }
+}

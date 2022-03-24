@@ -1,0 +1,29 @@
+ static int ValidateInput(int lv, int hv)         // Validates integer input  lv = lowest value,   hv = highest value
+        {
+            
+            bool Goodnum = false;
+            int Response;
+            do
+            {
+                Console.WriteLine("Choose a number between {0} and {1}", lv, hv);
+                Goodnum = int.TryParse(Console.ReadLine(), out Response);
+                if (Goodnum)
+                {
+                    if (Response < lv || Response > hv)
+                    {
+                        Console.WriteLine("{0} is not between {1} and {2}.  Try again...", Response, lv, hv);
+                        Goodnum = false;
+                    }
+                } else
+                {
+                    Console.WriteLine("Input is not valid. Try again.");
+                }
+            } while (!Goodnum);
+            return Response;
+        }
+
+
+
+Called by:
+
+int Choice = ValidateInput(1,100);

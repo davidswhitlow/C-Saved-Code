@@ -1,0 +1,30 @@
+class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            double Rad = 20;
+            for (double g = 0; g < 6.2; g += .1)
+            {
+                double px = Rad * Math.Cos(g);
+                double py = Rad * Math.Sin(g) * 1.8;
+                int p1 = Convert.ToInt32(px + 30); 
+                int p2 = Convert.ToInt32(py +  80);
+                Console.SetCursorPosition(p2, p1);
+                Console.WriteLine("*");
+
+            }
+            //int x = int.Parse(Console.ReadLine());
+            /*string strg = string.Empty;
+            for (int y = 0; y < 210; y++)
+            {
+                strg += 'X';
+            }
+            //for (int g = 0; g < 80; g++)
+            //{
+            Console.SetCursorPosition(1, 60);
+              Console.WriteLine(strg);
+            //}      */
+        }
+
+    }

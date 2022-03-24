@@ -1,0 +1,92 @@
+using System;
+using System.IO;
+
+namespace Project_1
+{
+    class Program
+    {
+       static string GetMessage(String plate)
+        {
+            string FirstThree = plate.Substring(0, 3);
+            string Msg;
+
+            if (FirstThree == "ABG")
+            {
+                Msg = "In ABG Range"; 
+            }   else
+            {
+                Msg = "Out Of Range";
+            }
+            return Msg;
+        }
+        static void Main(string[] args)
+        {
+            string PlateNo;
+            string PlateType;
+            string TitleNo;
+            string VIN;
+            string CustNo;
+            string LastName;
+            string FirstName;
+            string MiddleName;
+            string Oline;
+            string Message;
+            string[] OArray = new string[10000];
+            //string [] OArray = { " ", " ", " ", " ", " " };
+            int RecordCount = 0;
+            /* if (!File.Exists(@"C:\C#Test\Testfile10.txt")) { 
+               File.Create(@"C:\C#Test\Testfile10.txt");
+                } else
+            {
+                Console.WriteLine("File already exists");           
+            } */
+
+            string[] Infile = File.ReadAllLines(@"C:\C#Test\VehicleRPT.txt");
+            
+            
+            Oline = "Plate # ~ Plate Type ~ Titleno ~ VIN ~ CustNo ~ LastName ~ FirstName ~ MiddleName";
+            OArray[RecordCount] = Oline;
+            RecordCount++;
+
+            for (int i = 0; i < Infile.Length; i++)
+            {
+                PlateNo    = Infile[i].Substring(0, 10);
+                PlateType  = Infile[i].Substring(11, 5);
+                TitleNo    = Infile[i].Substring(17, 10);
+                VIN        = Infile[i].Substring(28, 17);
+                CustNo     = Infile[i].Substring(51, 12);
+                LastName   = Infile[i].Substring(64, 10);
+                FirstName  = Infile[i].Substring(85, 10);
+                MiddleName = Infile[i].Substring(106, 9);
+
+               
+
+                int g = i + 1;
+                
+                Message = GetMessage(PlateNo);
+               
+                Console.WriteLine();
+                Console.WriteLine("Customer " + g + "**************" + Message);
+                Console.WriteLine("PlateNo    : " + PlateNo);
+                Console.WriteLine("PlateType  : " + PlateType);
+                Console.WriteLine("TitleNo    : " + TitleNo);
+                Console.WriteLine("VIN        : " + VIN);
+                Console.WriteLine("CustNo     : " + CustNo);
+                Console.WriteLine("Last Name  : " + LastName);
+                Console.WriteLine("First Name : " + FirstName);
+                Console.WriteLine("Middle Name: " + MiddleName);
+
+                Oline = PlateNo + "~" + PlateType + "~" + TitleNo + "~" + VIN + "~" + CustNo + "~" + LastName + "~" + FirstName + "~" + MiddleName;
+                                                                           // File.WriteAllText(@"C:\C#Test\output.txt", Outline);
+                OArray.SetValue(Oline, RecordCount);
+                                                                           //OArray[RecordCount] = Oline;
+                RecordCount++;
+
+                                          
+                
+            }
+            File.WriteAllLines(@"C:\C#Test\Output.txt", OArray);
+
+        }
+    }
+}

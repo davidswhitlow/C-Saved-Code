@@ -1,0 +1,39 @@
+static void WriteBox(string act, int xc, int yc,int w, int h)  // xc = col start yc = line start  w = width  h = height
+        {
+            string boxline = string.Empty;
+            string spaces = "                                                                                                    ";             
+            string astline = string.Empty;
+            char bc = ' ';
+            int interrior = w - 2;
+            string Iline = "|" + spaces.Substring(1, interrior) + "|"; 
+            int ycx = yc;
+            if (act == "d")
+            {
+                astline = "+-----------------------------------------------------------------------------------------------------";
+                bc = '*';
+                Console.SetCursorPosition(xc, yc);
+                Console.WriteLine(astline.Substring(0, w -1) + "+");
+                for (int x = 0; x < h; x++)
+                {
+                    ycx++;
+                    Console.SetCursorPosition(xc, ycx);
+                    Console.WriteLine(Iline);
+                    
+                }
+                ycx++;
+                Console.SetCursorPosition(xc, ycx);
+                Console.WriteLine(astline.Substring(0, w-1) + "+");
+            }
+            if (act == "e")
+            {
+                astline = spaces.Substring(1, w);
+
+                for (int q = 0; q < h+2; q++)
+                {
+                    Console.SetCursorPosition(xc, ycx);
+                    Console.WriteLine(astline);
+                    ycx++;
+                }
+                
+            }
+        }

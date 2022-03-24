@@ -1,0 +1,122 @@
+using System;
+
+namespace NextLevel1
+{
+    class Program
+    {
+        /* static string GetClasses()
+        {
+            string a = p1.GetPlayerClass();
+            string b = p2.GetPlayerClass();
+            string c = p3.GetPlayerClass();
+            string d = p4.GetPlayerClass();
+            string e = p5.GetPlayerClass(); 
+            string classes = a + b + c + d + e;
+            return classes;
+        } */
+        static void Main(string[] args)
+        {
+            int a = 0;
+            int b = 0;
+            int c = 0;
+            int d = 0;
+            int e = 0;
+            Player p1 = new Player("Thor", "Magic User", 345);
+            Player p2 = new Player("Crusher", "Paladin", 450);
+            Player p3 = new Player("Zy", "Magic User", 882);
+            Player p4 = new Player("Windwar", "Cleric", 134);
+            Player p5 = new Player("GGod", "Fighter", 660);
+            a = p1.GetPlayerHealth();
+            b = p2.GetPlayerHealth();
+            c = p3.GetPlayerHealth();
+            d = p4.GetPlayerHealth();
+            e = p5.GetPlayerHealth();
+            Console.WriteLine("Health (before): {0}  {1}  {2}   {3}  {4}", a, b, c, d, e);
+            p1.PlayerHit(25);
+            p2.PlayerHit(42);
+            p3.PlayerHit(7);
+            p4.PlayerHit(22);
+            p5.PlayerHit(15);
+            a = p1.GetPlayerHealth();        
+            b = p2.GetPlayerHealth();
+            c = p3.GetPlayerHealth();
+            d = p4.GetPlayerHealth();
+            e = p5.GetPlayerHealth();
+            Console.WriteLine("Health (after hits): {0}  {1}  {2}   {3}  {4}", a, b, c, d, e);
+            p1.PlayerHeal(250);
+            p2.PlayerHeal(420);
+            p3.PlayerHeal(70);
+            p4.PlayerHeal(220);
+            p5.PlayerHeal(150);
+            a = p1.GetPlayerHealth();
+            b = p2.GetPlayerHealth();
+            c = p3.GetPlayerHealth();
+            d = p4.GetPlayerHealth();
+            e = p5.GetPlayerHealth();
+            Console.WriteLine("Health (after massive heals): {0}  {1}  {2}   {3}  {4}", a, b, c, d, e);
+
+        }
+    
+
+        /*static void CurrentGameStatus()
+        {
+
+            
+            string s1 = Player.GetPlayerStats(p1);
+            string s2 = p2.GetPlayerStats();
+            string s3 = p3.GetPlayerStats();
+            string s4 = p4.GetPlayerStats();
+            string s5 = p5.GetPlayerStats();
+            Console.WriteLine("Player 1: {0}", s1);
+        } */
+
+    }
+    
+     
+    
+    public class Player
+    {
+        public int Health { set; get; }
+        public string Name { set; get; }
+        public string Class { set; get; }
+        public string Status { set; get; }
+        public Player (string n, string c, int h)
+        {
+            Name = n;
+            Class = c;
+            Health = h;
+            Status = "Alive";
+            
+        }
+        public void PlayerHit(int pts)
+        {
+            Health -= pts;
+            if (Health <= 0)
+            {
+                Status = "Dead";
+            }
+        }
+        
+        public string GetPlayerStats (Player p)
+        {
+            string status = p.GetPlayerName() + " " + p.GetPlayerClass() + " " + p.GetPlayerHealth() + " " + p.Status;
+            return status;
+        }
+        public void PlayerHeal(int pts)
+        {
+            Health += pts;
+        }
+        public int GetPlayerHealth()
+        {
+            return Health;
+        }
+        public string GetPlayerClass()
+        {
+            return Class;
+        }
+        public string GetPlayerName()
+       {
+            return Name;
+        }
+    }   
+}

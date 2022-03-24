@@ -1,0 +1,52 @@
+ static void Main(string[] args)
+        {
+            Vehicle[] veharray = new Vehicle[10];
+            Vehicle veh = new Vehicle("000000000000");
+            
+            string inline = string.Empty;
+            inline = Console.ReadLine();
+            veh = new Vehicle(inline);
+            veharray[1] = veh;
+            inline = Console.ReadLine();
+            veh = new Vehicle(inline);
+            veharray[2] = veh;
+            inline = Console.ReadLine();
+            veh = new Vehicle(inline);
+            veharray[3] = veh;
+            inline = Console.ReadLine();
+            veh = new Vehicle(inline);
+            veharray[4] = veh;
+            for (int x = 1; x < 5; x++)
+            {
+                veharray[x].GetDescription();
+            }
+
+            /*Console.WriteLine("Year: {0}  Make: {1}    Model: {2}", veh1.Year, veh1.Make, veh1.Model);
+            veh1.Make = "9999";
+            veh1.Year = "0000";
+            veh1.Model = "XXXX";
+            Console.WriteLine("Year: {0}  Make: {1}    Model: {2}", veh1.Year, veh1.Make, veh1.Model);
+            veh1.GetDescription(); */
+
+        }
+        public class Vehicle
+        {
+            //private string year;
+            //private string make;
+            //private string model;
+            public Vehicle (string y ) 
+            {
+                Year  = y.Substring(0, 4);
+                Make  = y.Substring(4, 4);
+                Model = y.Substring(8, 4);
+                
+            }
+            public void GetDescription()
+            {
+                Console.WriteLine("{0} was a very good year.  It's a pity that {1} is a crappy make and {2} is an almost non-existant model", Year, Make, Model);
+            }
+            public string Year { get; set; }
+            public string Make { get; set; }
+            public string Model { get; set; }
+           
+            }

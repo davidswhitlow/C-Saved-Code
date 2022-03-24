@@ -1,0 +1,65 @@
+ /*
+            int x = args.Length;
+            int q = 13121;
+            
+            Console.Title = "My First Console";
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.WriteLine("*************************************************************************************");
+            Console.WriteLine("*                                                                                   *");
+            Console.WriteLine("*                     Welcome To This Fantastic Console Man!!                       *");
+            Console.WriteLine("*                                                                                   *");
+            Console.WriteLine("*************************************************************************************");
+            for (int y = 0; y < x; y++) { 
+                Console.WriteLine("Arg: {0}", args[y]);
+        }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine("OS: {0}  Number of Processors {1}  ", Environment.OSVersion, Environment.ProcessorCount);
+            Console.WriteLine("Amount {0:d10}",q);
+            
+            Console.WriteLine("=> Data Declarations");
+            string MyString = "String";
+            int MyInt = 995;
+            Console.WriteLine("Enter String Input:"); */
+
+
+
+            /*
+            string Upperstring = Input.ToUpper();
+            string Lowerstring = Input.ToLower();
+            
+            string [] Sarray = Input.Split(" ");
+            int Word = 0;
+            for (int y = Sarray.Length -1 ; y > -1; y--)
+            {
+                Console.WriteLine("Word {0}: {1}", y, Sarray[y]);
+            }
+            foreach (string line in Sarray) 
+            {
+                Word++;
+                Console.WriteLine("Word {0}  is {1}" , Word, line);
+            }
+
+            bool b1 = true;
+            bool b2 = false;
+            bool b3 = true;
+            // Console.WriteLine("String: {0} Int: {1}  Bool1: {2}  Bool2 {3}  Bool3 {4}", MyString, MyInt, b1, b2, b3); */
+            bool GotDavid = false;
+            string Input = Console.ReadLine();
+            string [] Text  = Input.Split();
+            foreach (string word in Text)
+            {
+                if (word == "David")
+                {
+                    GotDavid = true;
+                }
+
+            }
+            if (GotDavid)
+            {
+                Console.WriteLine("The string => {0} contains the word David", Input);
+            }   else
+            {
+                Console.WriteLine("There is no mention of the word David in the string - {0}", Input);
+
+            }

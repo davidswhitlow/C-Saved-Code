@@ -1,0 +1,95 @@
+string Titlepath = "C:\\C# Test\\PoemTitle.txt";
+string Bodypath = "C:\\C# Test\\PoemBody.txt";
+
+string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\AllPoems.txt");
+
+
+            string Appendline = "INSERT INTO TITLE (PoemId,TitleText)" + '\n';
+            System.IO.File.AppendAllText(Titlepath, Appendline);
+
+            string Appendline4 = "VALUES" + '\n';
+            System.IO.File.AppendAllText(Titlepath, Appendline4);
+string Bodypath = "C:\\C# Test\\PoemBody.txt";
+
+INSERT INTO CITIES (Population, Name)
+
+INSERT INTO StateABCapital (StateName, StateCode, StateCapital) VALUES
+VALUES (123, 'Timmy'),
+       (124, 'Jonny'),
+       (125, 'Sally')
+
+CREATE TABLE POPULATION (
+StateName varchar(30),
+Abbreviation varchar(2),
+StatePopulation bigint
+);
+
+
+
+
+
+static void Main(string[] args)
+        {
+            string Outpath = "C:\\C# Test\\KandQ.txt";
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\KingsAndQueens.txt");
+            int TotalYears = 0;
+            foreach (string line in Inputtext)
+            {
+                string Title = line.Substring(0, 7);
+                string Name = line.Substring(8, 16);
+                string Start = line.Substring(24, 4);
+                string End = line.Substring(31, 4);
+                int IntStart = Convert.ToInt32(Start);
+                int IntEnd = Convert.ToInt32(End);
+                int ReignLength = IntEnd - IntStart + 1;
+                TotalYears = TotalYears + ReignLength;
+                string Appendline = "Title: " + Title + "  Name: " + Name + "   Start of Reign: " + Start + "  End of Reign: " + End + " Length: " + ReignLength + "\n";
+                System.IO.File.AppendAllText(Outpath, Appendline);
+            }
+            string Appendline2 = "Total years: " + TotalYears.ToString();
+            System.IO.File.AppendAllText(Outpath, Appendline2);                     
+        }
+
+
+
+
+
+
+
+//string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\AllPoems.txt");
+            // char[] BackwardMessage;
+            bool Goodstring = false;
+            char Ichar;
+            Console.WriteLine("Input string: ");
+            do {
+                Ichar = Console.ReadKey(true).KeyChar;
+                if (Ichar == 'Q' | Ichar == 'q') { 
+                    Goodstring = true;  
+                }  else
+                {
+                    Console.WriteLine("Incorrect value. Please re-enter:");
+                }
+            } while (!Goodstring);
+            //nt y = int.Parse(Istring);
+            //Console.WriteLine(y);
+            /*
+            for (int x = y; x > -1 ; x--)
+            {
+                string zz = Istring.Substring(x, 1);
+                Console.Write(zz);
+                //Console.WriteLine(' ');
+
+            }
+            /*
+            int Number1 = 123;
+            string Answer = "Yes";
+            Console.WriteLine("Number1: " + Number1);
+            if (Answer == "Yes")
+            {
+                Number1 = 0;
+                Console.WriteLine("In The Loop Number1: " + Number1);
+            }
+            Console.WriteLine("Out of the Loop Number1: " + Number1);
+            foreach (string line in Inputtext)
+            {
+                Number1++;

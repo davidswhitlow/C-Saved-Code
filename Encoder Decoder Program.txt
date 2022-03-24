@@ -1,0 +1,54 @@
+static void Main(string[] args)
+        {
+            string charset = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.";
+            string codeset = charset + charset;
+            Console.WriteLine("Enter Action/Key/Text:");
+            string Inputline = Console.ReadLine();
+            string[] Iparms = Inputline.Split('/');
+            string Action = Iparms[0];
+            string Key = Iparms[1];
+            int Keylength = Key.Length;
+            int[] Keynum = new int[100];
+            for (int x = 0; x < Keylength; x++)
+            {
+                Keynum[x] = charset.IndexOf(Key.Substring(x, 1));
+                Console.WriteLine("Character {0}  Numeric Value: {1}", Key.Substring(x, 1), Keynum[x]);
+            }
+            string Text = Iparms[2];
+            int Textlength = Text.Length;
+            int[] Textnum = new int[100];
+            int ctr = 0;
+            int[] Encoded = new int[100];
+            string Encodedstring = string.Empty;
+            for (int x = 0; x < Textlength; x++)
+            {
+                Textnum[x] = charset.IndexOf(Text.Substring(x, 1));
+                //Console.WriteLine("Text Character {0}  Text numeric value: {1}", Text.Substring(x, 1), Textnum[x]);
+                if (Action == "e")
+                {
+                    Encoded[x] = Keynum[ctr] + Textnum[x];
+                }
+                if (Action == "d")
+                {
+                    Encoded[x] = Textnum[x] - Keynum[ctr];
+                    if (Encoded[x] < 0) {
+                        Encoded[x] += 65;
+                    } 
+                }
+                ctr++;
+                if (ctr == Keylength)
+                {
+                    ctr = 0;
+                }
+
+            }
+            for (int x = 0; x < Textlength; x++) {
+                //Console.WriteLine("Encoded character {0}   Encoded number {1}", codeset.Substring(Encoded[x], 1), Encoded[x]);
+                Encodedstring += codeset.Substring(Encoded[x], 1);
+            }
+            Console.WriteLine("Action: {0}", Action);
+            Console.WriteLine("Original String: {0}", Text);
+            Console.WriteLine("Encoded String : {0}", Encodedstring);
+            
+            
+        }

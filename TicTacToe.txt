@@ -1,0 +1,137 @@
+using System;
+
+namespace NewThings
+{
+    class Program
+    {
+        static void DrawBoard(char[] Board)
+        {
+            Console.Clear();
+            string Line1 = Board[1] + "     "  + Board[2] + "     " + Board[3];
+            string Line2 = Board[8] + "     " + "X" + "     " + Board[4];
+            string Line3 = Board[7] + "     " + Board[6] + "     " + Board[5];
+            Console.WriteLine(Line1);
+            Console.WriteLine(" ");
+            Console.WriteLine(Line2);
+            Console.WriteLine(" ");
+            Console.WriteLine(Line3);
+
+        }
+        static void Playit(GameMove pl)
+        {
+
+
+            int player = pl.Playermove;
+            int m = pl.Machinelook;
+            int move = pl.Playermove + 1;
+            
+                if (move > 8)
+                {
+                    move = 1;
+                }
+                if (move + 4 < 9)
+                {
+                    m = move + 4;
+                }
+                else
+                {
+                    m = (move + 4) % 8;
+                }
+                pl.Machinemove = move;
+                pl.Machinelook = m;
+              
+
+        }
+        static void Main(string[] args)
+        {
+            char[] Board = new char[] { '.', '.', '.', '.', '.', '.', '.', '.', '.' };
+
+            DrawBoard(Board);
+            GameMove Current = new GameMove(0, 0, 0, ' ', ' ', 'x');
+            Console.WriteLine("Values   Playermove: {0}   Machinemove: {1}    Machinelook {2}", Current.Playermove, Current.Machinemove, Current.Machinelook);
+            bool FirstMove = true;
+            int playermove = 0;
+            int machinemove = 0;
+            int machinelook = 0;
+            bool GameOver = false;
+            bool Goodnum;
+            do
+            {
+                do
+                {
+                    Goodnum = int.TryParse(Console.ReadLine(), out playermove);
+                    if (Goodnum)
+                    {
+                        if (Board[playermove] != '.')
+                        {
+                            Console.WriteLine("Wrong move...try again");
+                            Goodnum = false;
+                        } 
+                    }
+                } while (!Goodnum);
+
+
+                Current.Playermove = playermove;
+
+                if (FirstMove)
+                {
+                    Playit(Current);
+                    //Console.WriteLine("Values   Playermove: {0}   Machinemove: {1}    Machinelook {2}", Current.Playermove, Current.Machinemove, Current.Machinelook);
+                    Board[Current.Machinemove] = 'X';
+                    Board[Current.Playermove] = 'O';
+                    DrawBoard(Board);
+                    FirstMove = false;
+                }
+                else
+
+                {
+                    if (playermove != Current.Machinelook)
+                    {
+                        Console.WriteLine("You lost");
+                        GameOver = true;
+                    }
+                    else
+                    {
+                        Playit(Current);
+                        //Console.WriteLine("Values   Playermove: {0}   Machinemove: {1}    Machinelook {2}", Current.Playermove, Current.Machinemove, Current.Machinelook);
+                        Board[Current.Machinemove] = 'X';
+                        Board[Current.Playermove] = 'O';
+                        DrawBoard(Board);
+                    }
+                }
+                    int rr = 0;
+                    for (int x =0; x <8; x++)
+                    {
+                        if (Board[x] == '.')
+                        {
+                            rr++;  
+                        }   
+                    }
+                    if (rr == 1)
+                    {
+                        Console.WriteLine("Tie Game");
+                        GameOver = true;
+                    }   
+                 
+            } while (!GameOver);
+        }
+        public class GameMove
+        {
+            public int Playermove { set; get; }
+            public int Machinemove { set; get; }
+            public int Machinelook { set; get; }
+            public char GameStatus { set; get; }
+            public char Result { set; get; }
+            public char FirstMove { get; set; }
+            public GameMove(int pm, int mm, int ml, char gs, char rs, char fm)
+            {
+                Playermove = pm;
+                Machinemove = mm;
+                Machinelook = ml;
+                GameStatus = gs;
+                Result = rs;
+                FirstMove = fm;
+            }
+        }
+    }
+}

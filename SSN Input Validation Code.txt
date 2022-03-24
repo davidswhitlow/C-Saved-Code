@@ -1,0 +1,61 @@
+static bool ValidateSSN(string fline)
+        {
+            string numset = "0123456789";
+            bool valid = true;
+            if (fline.Length == 11)
+            {
+                valid = true;
+            } else
+            {
+                valid = false;
+            }
+            if (valid)
+            {
+                // Console.WriteLine(fline.Substring)
+                if (fline.Substring(3, 1) == "-"  &&  fline.Substring(6, 1) == "-")
+                {
+                    valid = true;
+                } else
+                {
+                    valid = false;
+                }
+                for (int x = 0; x < 3; x++)
+                {
+                    if (!numset.Contains(fline.Substring(x, 1))) {
+                        valid = false;
+                    }
+                }
+                for (int x = 4; x < 6; x++)
+                {
+                    if (!numset.Contains(fline.Substring(x, 1))) {
+                        valid = false;
+                    }
+                }
+                for (int x = 7; x < 11; x++)
+                {
+                    if (!numset.Contains(fline.Substring(x, 1))) {
+                        valid = false;
+                    }
+                }
+
+            }
+            return valid;
+        }
+            
+
+        static void Main(string[] args)
+        {
+            bool GoodSSN = true;
+            string InputString = Console.ReadLine();
+            GoodSSN = ValidateSSN(InputString);
+            if (GoodSSN)
+            {
+                Console.WriteLine("Valid SSN");
+            }   else
+            {
+                Console.WriteLine("SSN is NOT valid");
+            }
+            
+            
+
+        }

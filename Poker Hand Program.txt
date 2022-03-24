@@ -1,0 +1,171 @@
+using System;
+
+namespace ConsoleApp7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int Low = 999999999;
+            int High = 0;
+            int[] NumberTotal = new int[53];
+            int WriteCount = 0;
+            int DisplayCount = 0;
+            int YesCount =0;
+            int RoyalFlushCount =0;
+            int NumberOfHands = GetNum();
+            string Result = string.Empty;
+            int[] Hand = new int[6];
+            int[] Deck = new int[53];
+            for (int x =1; x<6;x++) { 
+                Hand[x] = 0; }
+            
+            for (int y = 0; y < NumberOfHands; y++)
+            {
+                for (int x = 1; x < 53; x++) { Deck[x] = 0; }
+                DealHand(Deck, Hand);
+                for (int x = 1; x < 6; x++)
+                {
+                    int m = Hand[x];
+                    NumberTotal[m]++;
+                }
+                Result = CheckHand(Hand);
+                // DisplayHand(Hand, Result);
+
+                if (Result == "Royal Flush!")
+                {
+                    DisplayHand(Hand, Result);
+                }
+                if (Result == "Same Suit") { YesCount++; }
+                if (Result == "Royal Flush!") { RoyalFlushCount++; }
+                DisplayCount++;
+                WriteCount++;
+                if (DisplayCount == 1000000)
+                {
+                    Console.WriteLine("Hands Generated: {0}  Flushes: {1}   Royal Flushes {2}", WriteCount,YesCount,RoyalFlushCount);
+                    DisplayCount = 0;
+                }
+            }
+            Console.WriteLine("Number of flushes {0}  Number of Royal Flushes {1}", YesCount,RoyalFlushCount);
+            for (int x = 1; x <53; x++)
+            {
+                Console.WriteLine("Number: {0}  Count: {1}", x, NumberTotal[x]);
+                if (NumberTotal[x] < Low) { Low = NumberTotal[x]; }
+                if (NumberTotal[x] > High) { High = NumberTotal[x]; }
+            }
+            Console.WriteLine("Low Value: {0}  High Value: {1}", Low, High);
+        }
+        static int[] DealHand(int [] D,int [] PH)
+        {
+            int CardCount = 0;
+            int HandCount = 0;
+            bool Dealt = false;
+            Random card = new Random();
+            do
+            {
+                int g = card.Next(1, 53);
+                if (D[g] != 9)
+                {
+                    CardCount++;
+                    if (CardCount == 26)
+                    {
+                        Dealt = true;
+                    }   else
+                    {
+                        if (CardCount == 1 || CardCount == 6 || CardCount == 11 || CardCount == 16 || CardCount == 21)
+                        {
+                            HandCount++;
+                            PH[HandCount] = g;
+                        }
+                        
+                        D[g] = 9;
+                    }
+                }
+             } while (!Dealt);
+            return PH;
+        }
+        static void DisplayHand(int []hand, string result)
+        {
+            string DisplayHand = string.Empty;
+            string CardSuit = string.Empty;
+            string[] Suit = { "Spades  ", "Diamonds", "Hearts  ", "Clubs   " };
+            string[] number = { "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "10", "J ", "Q ", "K ","A" };
+            // string number = "23456789TJQKA";
+            int HoldNum = 0;
+            for (int a = 1; a < 6; a++)
+            {
+                for (int b = 1; b < 5; b++)
+                {
+                    if (hand[b]>hand[b+1])
+                    {
+                        HoldNum = hand[b];
+                        hand[b] = hand[b + 1];
+                        hand[b + 1] = HoldNum;
+                    }
+                }
+            }
+            int g = 0;
+            for (int x = 1; x < 6; x++)
+            {
+                if (hand[x] < 14) { CardSuit = Suit[0];  g = hand[x]; }
+                if (hand[x] >= 14 && hand[x] < 27) { CardSuit = Suit[1];  g = hand[x] - 13; }
+                if (hand[x] >= 27 && hand[x] < 40) { CardSuit = Suit[2];  g = hand[x] - 26; }
+                if (hand[x] >= 40) { CardSuit = Suit[3];  g = hand[x] - 39; }
+                g--;
+                int r = hand[x];
+                //Console.Write("{0} {1}  : {2, -2} /",number[g], CardSuit, r);
+                Console.Write("{0} {1} /", number[g], CardSuit);
+            }
+            Console.Write("  {0}",result);
+            Console.WriteLine(" ");
+        }
+        static string CheckHand(int[] hand)
+        {
+            string RoyalFlush = "No";  
+            string CardSuit = string.Empty;
+            string[] Suit = { "Spades", "Diamonds", "Hearts", "Clubs" };
+            // string number = "234567890JQKA";
+            int g = 0;
+            int SuitInd = 0;
+            for (int x = 1; x < 6; x++)
+            {
+                if (hand[x] < 14) { g = 1; }
+                if (hand[x] >= 14 && hand[x] < 27) { g = 10; }
+                if (hand[x] >= 27 && hand[x] < 40) { g = 100; }
+                if (hand[x] >= 40) { g = 1000; }
+                SuitInd += g;
+              
+                // Console.WriteLine("{0} =>  {1} of {2}   Card Number: {3, -2}", x, number.Substring(g, 1), CardSuit, To);
+            }
+            if (SuitInd == 5 || SuitInd == 50 || SuitInd == 500 || SuitInd == 5000)
+            {
+                if ((hand[1] == 9 && hand[2] == 10 && hand[3] == 11 && hand[4] == 12 && hand[5] == 13) ||
+                    (hand[1] == 22 && hand[2] == 23 && hand[3] == 24 && hand[4] == 25 && hand[5] == 26) ||
+                    (hand[1] == 35 && hand[2] == 36 && hand[3] == 37 && hand[4] == 38 && hand[5] == 39) ||
+                    (hand[1] == 48 && hand[2] == 49 && hand[3] == 50 && hand[4] == 51 && hand[5] == 52) )
+                
+                {
+                    RoyalFlush = "Royal Flush!";
+                }   else
+                {
+                    RoyalFlush = "Same Suit";
+                }
+
+            }
+           
+            return RoyalFlush;
+        }
+        static int GetNum()
+        {
+            bool GoodNum = false;
+            int g;
+            do
+            {
+                Console.Write("Enter Number of Hands Dealt: ");
+                GoodNum = Int32.TryParse(Console.ReadLine(), out g);
+            } while (!GoodNum);
+            Console.WriteLine(" ");
+            return g;
+        }
+    }
+}

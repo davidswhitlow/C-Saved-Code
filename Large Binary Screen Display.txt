@@ -1,0 +1,194 @@
+static void WriteNum (int Num, int Posx,int Posy)
+        {
+            int px = Posx;
+            int py = Posy;
+
+            string z1 = "    ****";
+            string z2 = "  ********";
+            string z3 = "***      ***";
+            string z4 = "***      ***";
+            string z5 = "***      ***";
+            string z6 = "***      ***";
+            string z7 = "  ********";
+            string z8 = "    ****";
+
+            string o1 = "      ***";
+            string o2 = "    *****";
+            string o3 = "  *******";
+            string o4 = "     ****";
+            string o5 = "     ****";
+            string o6 = "     ****";
+            string o7 = "  **********";
+            string o8 = "  **********";
+            
+            string n1 = string.Empty;
+            string n2 = string.Empty;
+            string n3 = string.Empty;
+            string n4 = string.Empty;
+            string n5 = string.Empty;
+            string n6 = string.Empty;
+            string n7 = string.Empty;
+            string n8 = string.Empty;
+
+            //if (Pos == 1) { px = 1;}
+            //if (Pos == 2) { px = 20;}
+            //if (Pos == 3) { px = 40;}
+            //if (Pos == 4) { px = 60; }
+            //if (Pos == 5) { px = 80; }
+            //if (Pos == 6) { px = 100; }
+            //if (Pos == 7) { px = 120; }
+            //if (Pos == 8) { px = 140; }
+            if (Num == 0)
+            {
+                n1 = z1;
+                n2 = z2;
+                n3 = z3;
+                n4 = z4;
+                n5 = z5;
+                n6 = z6;
+                n7 = z7;
+                n8 = z8;
+            }
+            
+            if (Num == 1)
+            {
+                n1 = o1;
+                n2 = o2;
+                n3 = o3;
+                n4 = o4;
+                n5 = o5;
+                n6 = o6;
+                n7 = o7;
+                n8 = o8;
+            }
+            ClearNum(px, py);
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n1);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n2);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n3);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n4);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n5);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n6);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n7);
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine(n8);
+            py++;
+        }
+        static void ClearNum(int px, int py)
+        {
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   ");
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   ");
+            
+            py++;
+            Console.SetCursorPosition(px, py); 
+            Console.WriteLine("                   ");
+            
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   ");
+            
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   "); 
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   "); 
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   ");
+            py++;
+            Console.SetCursorPosition(px, py);
+            Console.WriteLine("                   ");
+            py++;
+        }
+        static void Main(string[] args)
+        {
+            bool exit = false;
+            do
+            {
+                Console.Clear();
+                for (int a = 0; a < 2; a++)
+                {
+                    for (int b = 0; b < 2; b++)
+                    {
+                        for (int c = 0; c < 2; c++)
+                        {
+                            for (int d = 0; d < 2; d++)
+                            {
+                                for (int e = 0; e < 2; e++)
+                                {
+                                    for (int f = 0; f < 2; f++)
+                                    {
+                                        for (int g = 0; g < 2; g++)
+                                        {
+                                            for (int h = 0; h < 2; h++)
+                                            {
+                                                WriteNum(a, 1,5);
+                                                WriteNum(b, 15,5);
+                                                WriteNum(c, 30,5);
+                                                WriteNum(d, 45,5);
+                                                WriteNum(e, 60,5);
+                                                WriteNum(f, 75,5);
+                                                WriteNum(g, 90,5);
+                                                WriteNum(h, 105,5);
+
+                                                WriteNum(h, 1, 15);
+                                                WriteNum(g, 15, 15);
+                                                WriteNum(f, 30, 15);
+                                                WriteNum(e, 45, 15);
+                                                WriteNum(d, 60, 15);
+                                                WriteNum(c, 75, 15);
+                                                WriteNum(b, 90, 15);
+                                                WriteNum(a, 105, 15);
+
+                                                WriteNum(a, 1, 25);
+                                                WriteNum(e, 15, 25);
+                                                WriteNum(b, 30, 25);
+                                                WriteNum(f, 45, 25);
+                                                WriteNum(c, 60, 25);
+                                                WriteNum(g, 75, 25);
+                                                WriteNum(d, 90, 25);
+                                                WriteNum(h, 105, 25);
+
+                                                WriteNum(e, 1, 35);
+                                                WriteNum(c, 15, 35);
+                                                WriteNum(d, 30, 35);
+                                                WriteNum(b, 45, 35);
+                                                WriteNum(f, 60, 35);
+                                                WriteNum(h, 75, 35);
+                                                WriteNum(g, 90, 35);
+                                                WriteNum(a, 105, 35);
+                                                //Console.SetCursorPosition(1, 20);
+                                                //string gg = Console.ReadLine();
+                                                //if (gg != "") { exit = true; } 
+                                                //Console.SetCursorPosition(10, 10);
+                                                //Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7}", a, b, c, d, e, f, g, h);
+                                                int mydelay = 200;
+                                                Thread.Sleep(mydelay);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            } while (!exit);
+        }

@@ -1,0 +1,119 @@
+class Program
+    {
+        static void WriteValues(int a, int b, int c, int d)
+        {
+            Console.SetCursorPosition(60, 5);`
+            Console.WriteLine("Current Values:");
+            Console.SetCursorPosition(65, 7);
+            Console.WriteLine("A = " + a);
+            Console.SetCursorPosition(65, 8);
+            Console.WriteLine("B = " + b);
+            Console.SetCursorPosition(65, 9);
+            Console.WriteLine("C = " + c);
+            Console.SetCursorPosition(65, 10);
+            Console.WriteLine("D = " + d);
+        }
+        static void WriteItem(string Item, int Row, int Column)
+        {
+            Console.SetCursorPosition(Column, Row);
+            Console.WriteLine(Item);
+        }
+        static void WriteMenu(int a, int b, int c, int d)
+        {
+            Console.Clear();
+            WriteItem("1 - A", 3, 20);
+            WriteItem("2 - B", 4, 20);
+            WriteItem("3 - C", 5, 20);
+            WriteItem("4 - D", 6, 20);
+            WriteItem("5 - Add numbers", 7, 20);
+            WriteItem("Q/q - Quit", 8, 20);
+            WriteValues(a,b,c,d);
+        }
+        static int GetInteger(string Heading, int Line, int Column)
+        {
+            int m = Heading.Length + 9;
+            Column++;
+            Column++;
+            bool Goodnum = false;
+            int g;
+            do
+            {
+                Console.SetCursorPosition(Column, Line);
+                Console.Write("                                          ");
+                Console.SetCursorPosition(Column, Line);
+                Console.Write(Heading + ": ");
+                                
+                Goodnum = int.TryParse(Console.ReadLine(), out g);
+                
+                if (!Goodnum)
+                {
+                    Console.SetCursorPosition(m, Line);
+                    Console.WriteLine(" **** Invalid input....please try again. ***");
+                    for (int y = 0; y < 500000000; y++) { int r = 0; }
+                    Console.SetCursorPosition(m, Line);
+                    Console.WriteLine("                                             ");
+                }
+            } while (!Goodnum);
+            return g;
+        }
+        static void Main(string[] args)
+        {
+            int a = 0;
+            int b = 0;
+            int c = 0;
+            int d = 0;
+            
+            bool Goodchoice = false;
+            do
+            {
+                WriteMenu(a,b,c,d);
+                Console.SetCursorPosition(10, 10);
+                char m = Console.ReadKey().KeyChar;
+                Console.SetCursorPosition(10, 10);
+                Console.WriteLine(" ");
+              
+                switch (m)
+                {
+                    case '1':
+                        a = GetInteger("Set value for A", 12, 15);
+                        break;
+
+                    case '2':
+                        b = GetInteger("Set value for B", 12, 15);
+                        break;
+                    case '3':
+                        c = GetInteger("Set value for C", 12, 15);
+                        break;
+                    case '4':
+                        d = GetInteger("Set value for D", 12, 15);
+                        break;
+                    case '5':
+                        int Sum = a + b + c + d;
+                        Console.SetCursorPosition(5, 15);
+                        Console.WriteLine("Sum: " + Sum);
+                        for (int qq = 0;  qq <500000000; qq++ ) { 
+                            int zzz = 0; 
+                        }
+                        Console.SetCursorPosition(5, 15);
+                        Console.WriteLine("                          ");
+                        break;
+                    case 'q':
+                        Goodchoice = true;
+                        break;
+                    case 'Q':
+                        Goodchoice = true;
+                        break;
+                    default:
+                        break;
+                }
+            } while (!Goodchoice);
+            
+            
+            /* int a = GetInteger("Gimmie a number",10,5);
+            int b = GetInteger("Gimmie another",10,30);
+            int sum = a + b;
+            int product = a * b;
+            Console.WriteLine("The sum of {0} and {1} is {2} while the product of {0} and {1} is {3}", a, b, a + b, a * b); */
+            
+        }
+    }

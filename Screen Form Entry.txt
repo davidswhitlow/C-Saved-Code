@@ -1,0 +1,91 @@
+class Program
+
+    {
+        static void WriteMenu()
+        {
+            Console.SetCursorPosition(30, 1);
+            Console.WriteLine("This Is The Title Of The Menu");
+            Console.SetCursorPosition(5,3 );
+            Console.WriteLine("Id Number:");      // 15,3
+            Console.SetCursorPosition(5, 5);
+            Console.WriteLine("Name:");           // 11,5   
+            Console.SetCursorPosition(40, 5);
+            Console.WriteLine("Code:");           // 46,5
+            Console.SetCursorPosition(70, 5);
+            Console.WriteLine("Department:");     // 29,3
+            Console.SetCursorPosition(16, 20);
+        }
+        static void Main(string[] args)
+        {
+            String[] Data = { " ", " '", " '", " '" };
+            int[] Xpos = { 16, 11, 46, 83 };
+            int[] Ypos = { 3, 5, 5, 5 };
+            int Sindex = 0;
+
+            
+            WriteMenu();
+            bool Exit = false;
+            do
+            {
+                Console.SetCursorPosition(Xpos[Sindex], Ypos[Sindex]);
+                Console.WriteLine("                ");
+                Console.SetCursorPosition(Xpos[Sindex], Ypos[Sindex]);
+                bool Donefield = false;
+                string field = string.Empty;
+                do
+                {
+                    char chr = Console.ReadKey(true).KeyChar;
+                    if (chr == '~')
+                    {
+                        Exit = true;
+                        Donefield = true;
+                    }   else
+                    if (chr == '\t')
+                    {
+                        Donefield = true;
+                    }   else
+                    {
+                        field = field + chr;
+                        Console.Write(chr);
+                    }
+
+                } while (!Donefield);
+
+                Data[Sindex] = field;
+                if (Data[Sindex] == "Quit")
+                {
+                    Exit = true;
+                }
+                Sindex++;
+                if (Sindex > 3)
+                {
+                    Sindex = 0;
+                }
+            } while (!Exit);
+            Console.SetCursorPosition(1, 20);
+            Console.WriteLine("Field 1: {0}   Field 2: {1}  Field 3 {2}  Field 4: {3}", Data[0], Data[1], Data[2], Data[3]);
+            /* Console.SetCursorPosition(16, 3);
+            Console.WriteLine("IDNUMBER");
+            Console.SetCursorPosition(83, 5);
+            Console.WriteLine("DEPARTMENT");
+            Console.SetCursorPosition(11, 5);
+            Console.WriteLine("NAME");
+            Console.SetCursorPosition(46, 5);
+            Console.WriteLine("CODE");  */
+            
+            
+
+
+            /* bool Goodresult = false;
+            do
+            {
+                String IdNum = Console.ReadLine();
+                Console.SetCursorPosition(16, 5);
+                Console.WriteLine(IdNum);
+            
+            } while (!Goodresult); */
+
+
+        }
+
+    }

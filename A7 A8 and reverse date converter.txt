@@ -1,0 +1,31 @@
+        static string Conv8to7(string Date8)
+        {
+            string sYear = Date8.Substring(0, 4);
+            string sMonthday = Date8.Substring(4,4);
+            // Console.WriteLine("Year {0}  Monthday {1}", sYear, sMonthday);
+            int Year = int.Parse(sYear);
+            Year -= 1800;
+            string pYear = Year.ToString();
+            string Date7 = pYear + sMonthday;
+            return Date7;
+                    
+        }
+        static string Conv7to8(string Date7)
+        {
+            string sYear = Date7.Substring(0, 3);
+            string sMonthday = Date7.Substring(3, 4);
+            // Console.WriteLine("Year {0}  Monthday {1}", sYear, sMonthday);
+            int Year = int.Parse(sYear);
+            Year += 1800;
+            string pYear = Year.ToString();
+            string Date8 = pYear + sMonthday;
+            return Date8;
+
+        }
+        static void Main(string[] args)
+        {
+            string A8date = Console.ReadLine();
+            Console.WriteLine("A8 date: {0} A7 date: {1}", A8date,Conv8to7(A8date));
+            string A7date = Console.ReadLine();
+            Console.WriteLine("A7 date {0}  A8 date: {1}", A7date, Conv7to8(A7date));
+        }

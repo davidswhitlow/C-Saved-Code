@@ -1,0 +1,86 @@
+using System;
+
+namespace MyFirstProgram
+{
+    class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            int rnum = 0;
+            string[] Nums = {"0","1","2","3","4","5","6","7","8","9"};
+            string[] Answer = new string[3];
+            Random rand = new Random();
+
+                rnum = rand.Next(0, 10);
+                Answer[0] = Nums[rnum];
+                rnum = rand.Next(0, 10);
+                Answer[1] = Nums[rnum];
+                rnum = rand.Next(0, 10);
+                Answer[2] = Nums[rnum];
+                string Sanswer = Answer[0] + Answer[1] + Answer[2];
+                //Console.WriteLine(Sanswer);
+            
+            
+            bool GotIt = false;
+            string Pick = string.Empty;
+            int Score = 0;
+            do
+            {
+                Pick = GetPick();
+                Score = CheckPick(Pick, Answer);
+                //Console.WriteLine("Answer: {2}   Pick: {0}   Score: {1}",Pick,Score,Sanswer);
+                Console.WriteLine("Pick: {0}   Score: {1}", Pick, Score);
+                if (Score == 3)
+                {
+                    Console.WriteLine("***** CORRECT *******");
+                    Console.ReadLine();
+                    GotIt = true;
+                }
+
+            } while (!GotIt);
+
+        }
+        public static string GetPick()
+        {
+            string Valid = "0123456789";
+            bool GoodPick = false;
+            string Pick = string.Empty;
+            bool BadChar = false;
+            do
+            {
+                Console.Write("Enter Pick: ");
+                Pick = Console.ReadLine();
+                if (Pick.Length == 3)
+                {
+                    BadChar = false;
+                    for (int g = 0; g < 2; g++)
+                    {
+                        string p = Pick.Substring(g, 1);
+                        if (Valid.IndexOf(p) == -1)
+                        {
+                            BadChar = true;
+                        }
+                    }
+                    if (!BadChar)
+                    {
+                        GoodPick = true;
+                    }
+                }
+            } while (!GoodPick);
+            return Pick;
+        }
+        public static int CheckPick(string p,string[] a) 
+        {
+            int score = 0;
+            for (int x = 0; x<3;x++)
+            {
+                if (p.Substring(x,1) == a[x])
+                {
+                    score++;
+                }
+            }
+            return score;
+        }
+        
+    }
+}

@@ -1,0 +1,40 @@
+ static int Validatenum(string Inputn)
+        {
+            string Numeric = "0123456789";
+            bool Validnum = true;
+           
+            for (int x = 0; x < Inputn.Length; x++)
+            {
+                if (!Numeric.Contains(Inputn.Substring(x, 1)))
+                {
+                    Validnum = false;
+                }
+            }
+            if (Validnum)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0; 
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            int valid;
+            do
+            {
+                Console.WriteLine("Enter numeric input:");
+                string Inputvalue = Console.ReadLine();
+                valid = Validatenum(Inputvalue);
+                if (valid == 1)
+                {
+                    Console.WriteLine("Valid Numeric");
+                }
+                else
+                {
+                    Console.WriteLine("Not a valid number");
+                }
+            } while (valid != 1);
+        }

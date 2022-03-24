@@ -1,0 +1,38 @@
+  static void Main(string[] args)
+        {
+            string Istring = Console.ReadLine();
+            int Vowelcount = 0;
+            for (int x = 0; x < Istring.Length; x++)
+            {
+                if ( Equals(Istring.Substring(x,1),"a") || 
+                     Equals(Istring.Substring(x,1),"e") || 
+                     Equals(Istring.Substring(x,1),"i") || 
+                     Equals(Istring.Substring(x,1),"o") || 
+                     Equals(Istring.Substring(x,1),"u") ) 
+                   {
+                    Vowelcount++;
+                   }
+
+            }
+            
+            Console.WriteLine("Count of a: {0}", Vowelcount);
+            Console.WriteLine("Hash is: {0}", Istring.GetHashCode());
+           /* string Writepath = "C:\\C# Test\\PopulationCmd.txt";
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\Population.txt");
+            foreach (string line in Inputtext) {
+
+                string[] la = line.Split("\"");
+                string n1= la[1];
+                string Nation = n1.PadRight(50);
+                string p1 = la[5];
+                string population = p1.Replace(",", string.Empty);
+                // Console.WriteLine(Nation + " - " + population);
+                string Oline = "(" + "'" + Nation + "'" + "," + population + "),\n";
+                Console.WriteLine(Oline);
+                System.IO.File.AppendAllText(Writepath, Oline);
+                //int Countrypoint = GetCountry(newline2);
+                // string Country = newline.Substring(0, Countrypoint);
+                // Console.WriteLine(Country); */
+
+            
+        }

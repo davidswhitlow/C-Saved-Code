@@ -1,0 +1,23 @@
+static void Main(string[] args)
+        {
+            bool ValidMove = true;
+            string ValidInput = "kqrbnpabcdefgh12345678";
+            string Inputline = Console.ReadLine();
+            Inputline = Inputline.ToLower();
+            for (int g = 0; g < Inputline.Length; g++)
+            {
+                if (ValidInput.Contains(Inputline.Substring(g,1)))
+                {
+                    int x = 0;
+                } else
+                {
+                    ValidMove = false;
+                }
+            }
+            if (ValidMove)
+            {
+                Console.WriteLine("Valid Move");
+            }   else
+            {
+                Console.WriteLine("Invalid move");
+            }

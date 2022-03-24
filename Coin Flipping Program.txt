@@ -1,0 +1,52 @@
+using System;
+
+
+namespace ConsoleApp3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            decimal HeadsFlipTotal = 0;
+            decimal TailsFlipTotal = 0;
+            decimal HeadsTotal = 0;
+            decimal TailsTotal = 0;
+            int Tie = 0;
+            Random rnd = new Random();
+            int x = 0;
+            int test = 0;
+            int heads = 0;
+            int tails = 0;
+            for (int t = 0; t < 1000; t++)
+            {
+                for (int y = 0; y < 1000000; y++)
+                {
+                    x = rnd.Next(1, 3);
+                    if (x == 1) { heads++; }
+                    if (x == 2) { tails++; }
+                    // Console.WriteLine(y)
+                }
+                test++;
+                Console.WriteLine("Test #{0}      Heads: {1}   Tails: {2}",test, heads, tails);
+                if (heads > tails) { HeadsTotal++; }
+                if (tails > heads) { TailsTotal++; }
+                if (heads == tails) { Tie++; } 
+                HeadsFlipTotal += heads;
+                TailsFlipTotal += tails;
+                heads = 0;
+                tails = 0;
+            }
+            Console.WriteLine("Heads wins: {0}   Tails wins: {1}   Ties: {2}", HeadsTotal, TailsTotal, Tie);
+            Console.WriteLine("Total Heads: {0}  Total Tails: {1}", HeadsFlipTotal, TailsFlipTotal);
+            decimal Diff = Math.Abs(HeadsFlipTotal - TailsFlipTotal);
+           
+            Decimal Percentage = 100 * (Diff / (HeadsFlipTotal + TailsFlipTotal));
+            Console.WriteLine("Difference: {0}   Percentage: {1} ", Diff, Percentage);
+
+
+        }
+    }
+}
+
+
+

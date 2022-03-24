@@ -1,0 +1,173 @@
+using System;
+
+namespace PlayingAround
+{
+    class Program
+    {
+        static int CheckMonthday(string month, int day) {
+            bool Goodnum = true;
+            switch (month)
+            {
+                case "01":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                case "02":
+                    if (day < 1 || day > 29) { Goodnum = false; }
+                    break;
+                case "03":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                case "04":
+                    if (day < 1 || day > 30) { Goodnum = false; }
+                    break;
+                case "05":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                case "06":
+                    if (day < 1 || day > 30) { Goodnum = false; }
+                    break;
+                case "07":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                case "08":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                case "09":
+                    if (day < 1 || day > 30) { Goodnum = false; }
+                    break;
+                case "10":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                case "11":
+                    if (day < 1 || day > 30) { Goodnum = false; }
+                    break;
+                case "12":
+                    if (day < 1 || day > 31) { Goodnum = false; }
+                    break;
+                default:
+                    Goodnum = false;
+                    break;
+            }
+            if (Goodnum)
+            {
+                return 0;
+            }   else
+            {
+                return 1;
+            }
+        }
+        static int Validate(string Idate)
+        {
+            string month;
+            int day;
+            int x = Idate.Length;
+
+            bool Goodnum = true;
+            for (int y = 0; y < x; y++)
+            {
+                if (string.Compare(Idate.Substring(y,1),"0") == -1 || string.Compare(Idate.Substring(y,1),"9") == 1)
+                {
+                    Goodnum = false;
+                }
+            }
+            if (x != 7 && x != 8)
+            {
+                Goodnum = false;
+            }
+            
+            if (x == 7)
+            {
+                int y3 = int.Parse(Idate.Substring(0, 3));
+                month = Idate.Substring(3, 2);
+                day = int.Parse(Idate.Substring(5, 2));
+                int z = CheckMonthday(month, day);
+                if (z == 1) { Goodnum = false; }
+                if (y3 < 100 || y3 > 230)
+                {
+                    Goodnum = false;
+                }
+            }
+            if (x == 8)
+            {
+                int y4 = int.Parse(Idate.Substring(0, 4));
+                month = Idate.Substring(4, 2);
+                day = int.Parse(Idate.Substring(6, 2));
+                int z = CheckMonthday(month, day);
+                if (z == 1) { Goodnum = false; }
+                if (y4 < 1900 || y4 > 2030)
+                {
+                    Goodnum = false;
+                }
+            }
+            if (x == 8)
+            {
+                month = Idate.Substring(4, 2);
+                day = int.Parse(Idate.Substring(6, 2));
+            }   
+            if (x == 7)
+            {
+                month = Idate.Substring(3, 2);
+                day = int.Parse(Idate.Substring(5, 2));
+            }
+           
+            
+
+            if (Goodnum)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+        static string Fixdate78(string Inputdate)
+        {
+            string Last4 = Inputdate.Substring(3, 4);
+            string Sfirst3 = Inputdate.Substring(0, 3);
+            int First3 = int.Parse(Sfirst3);
+            First3 += 1800;
+            string Output = First3.ToString() + Last4;
+            return Output;
+        }
+        static string Fixdate87(string Inputdate)
+        {
+            string Last4 = Inputdate.Substring(4, 4);
+            string Sfirst4 = Inputdate.Substring(0, 4);
+            int First4 = int.Parse(Sfirst4);
+            int First3 = First4 - 1800;
+            string Output = First3.ToString() + Last4;
+            return Output;
+        }
+        static void Main(string[] args)
+        {
+            string Odate;
+            int g = 2;
+            string Idate;
+            do
+            {
+                Idate = Console.ReadLine();
+                g = Validate(Idate);
+
+                if (g != 1)
+                {
+                    Console.WriteLine("Invalid Input....try again");
+                }
+            } while (g == 2);
+            int x = Idate.Length;
+            if (x == 7)
+            {
+                Odate = Fixdate78(Idate);
+                Console.WriteLine("Input N7: {0}   Output N8: {1}", Idate, Odate);
+            }
+            if (x == 8)
+            {
+                Odate = Fixdate87(Idate);
+                Console.WriteLine("Input N8: {0}   Output N7: {1}", Idate, Odate);
+            }
+
+
+        }
+    }
+}
+

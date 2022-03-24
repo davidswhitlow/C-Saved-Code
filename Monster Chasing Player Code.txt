@@ -1,0 +1,85 @@
+using System;
+
+namespace MyFirstProgram
+{
+    class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            bool Gotem = false;
+            int[] M = new int[2];
+            int[] T = new int[2];
+            T[0] = 85;
+            T[1] = 18;
+            M[0] = 40;
+            M[1] = 7;
+            int Speed = 3;
+            WritePos(M, T);
+            do
+            {
+                
+                for (int i = 0; i<100000000; i++) { int t = 0; }
+                //Console.ReadLine();
+                GetTargetPos(T, Speed);
+                SetMachinePos(M, T);
+                WritePos(M, T);
+                if (M[0] == T[0] && M[1] == T[1]) { Gotem = true; } 
+                
+                
+            } while (!Gotem);
+            
+            
+        }
+       
+        public static void WritePos(int[] m, int[] t)
+        {
+            Console.SetCursorPosition(m[0], m[1]);
+            Console.Write("M");
+            Console.SetCursorPosition(t[0], t[1]);
+            Console.Write("T");
+        }
+        public static void SetMachinePos(int[] m, int[] t)
+        {
+            int Ox = m[0];
+            int Oy = m[1];  
+            int xInc = t[0] - m[0];
+            int yInc = t[1] - m[1];
+            if (xInc != 0)
+            {
+                if (xInc < 0) { xInc = -1; } else { xInc = 1; }
+            }
+            if (yInc != 0)
+            {
+                if (yInc < 0) { yInc = -1; } else { yInc = 1; }
+            }
+            m[0] += xInc;
+            m[1] += yInc;
+            /*
+            Console.WriteLine("xInc = {0}   yInc = {1}", xInc, yInc);
+            Console.WriteLine("Target = {0} {1}  Machine {2} {3}", t[0], t[1], m[0], m[1]);
+            Console.ReadLine();
+            */
+            Console.SetCursorPosition(Ox, Oy);
+            Console.Write(" ");
+        }
+        public static void GetTargetPos(int[] t, int Speed)
+        {
+            int ox = t[0];
+            int oy = t[1];
+            
+            
+            Console.SetCursorPosition(2, 2);
+            ConsoleKeyInfo keyinfo = Console.ReadKey();
+            char c = keyinfo.KeyChar;
+            if (c == '8') { t[1] -= Speed; }
+            if (c == '2') { t[1] += Speed; }
+            if (c == '4') { t[0] -= Speed; }
+            if (c == '6') { t[0] += Speed; }
+            Console.SetCursorPosition(2, 2);
+            Console.Write(" ");
+            Console.SetCursorPosition(ox, oy);
+            Console.Write(" ");
+
+        }
+    }
+}

@@ -1,0 +1,134 @@
+ class Program
+    {
+        
+        static void WriteBox(string act, int xc, int yc,int w, int h)  // xc = col start yc = line start  w = width  h = height
+        {
+            string spaces = "                                                                                                    ";             string astline = string.Empty;
+            char bc = ' ';
+            int ycx = yc;
+            if (act == "d")
+            {
+                astline = "*********************************************************************************************************";
+                bc = '*';
+
+
+
+                Console.SetCursorPosition(xc, yc);
+                Console.WriteLine(astline.Substring(1, w));
+                for (int x = 0; x < h; x++)
+                {
+                    ycx++;
+                    Console.SetCursorPosition(xc, ycx);
+                    Console.WriteLine(bc);
+                    Console.SetCursorPosition(xc + w - 1, ycx);
+                    Console.WriteLine(bc);
+                }
+                ycx++;
+                Console.SetCursorPosition(xc, ycx);
+                Console.WriteLine(astline.Substring(1, w));
+            }
+            if (act == "e")
+            {
+                astline = spaces.Substring(1, w);
+
+                for (int q = 0; q < h+2; q++)
+                {
+                    Console.SetCursorPosition(xc, ycx);
+                    Console.WriteLine(astline);
+                    ycx++;
+                }
+               
+            }
+        }
+        static void SetMenu()
+        {
+            Console.SetCursorPosition(15, 5);
+            Console.WriteLine("1 - This is the first Option");
+            Console.SetCursorPosition(15, 6);
+            Console.WriteLine("2 - This is the second Option");
+            Console.SetCursorPosition(15, 7);
+            Console.WriteLine("3 - This is the third Option");
+            Console.SetCursorPosition(15, 8);
+            Console.WriteLine("4 - This is the fourth Option");
+            Console.SetCursorPosition(15, 9);
+            Console.WriteLine("5 - This is the fifth Option");
+            Console.SetCursorPosition(15, 11);
+            Console.WriteLine("Choice:");
+            Console.SetCursorPosition(23, 11);
+
+        }
+        static void PerformOption1()
+        {
+            Console.SetCursorPosition(15, 14);
+            Console.WriteLine("You chose Option 1");
+            WriteBox("d", 25, 20, 35, 5);
+        }
+        static void PerformOption2()
+        {
+            Console.SetCursorPosition(15, 14);
+            Console.WriteLine("You chose Option 2");
+            WriteBox("e", 25, 20, 35, 5);
+        }
+        static void PerformOption3()
+        {
+            Console.SetCursorPosition(15, 14);
+            Console.WriteLine("You chose Option 3");
+        }
+        static void PerformOption4()
+        {
+            Console.SetCursorPosition(15, 14);
+            Console.WriteLine("You chose Option 4");
+        }
+        static void PerformOption5()
+        {
+            Console.SetCursorPosition(15, 14);
+            Console.WriteLine("You chose Option 5");
+        }
+        static void Main(string[] args)
+        {
+            SetMenu();
+            char choice;
+            bool Escape = false;
+            do
+            {
+                choice = Console.ReadKey(true).KeyChar;
+                if (choice == 'q'|| choice == 'Q') { Escape = true; }
+                switch (choice)
+                {
+                    case '1':
+                        PerformOption1();
+                        break;
+                    case '2':
+                        PerformOption2();
+                        break;
+                    case '3':
+                        PerformOption3();
+                        break;
+                    case '4':
+                        PerformOption4();
+                        break;
+                    case '5':
+                        PerformOption5();
+                        break;
+                    case 'q':
+                        Escape = true;
+                        break;
+                    case 'Q':
+                        Escape = true;
+                        break;
+                    default:
+                        WriteBox("d", 10, 20, 40, 5);
+                        Console.SetCursorPosition(15, 23);
+                        Console.WriteLine("{0} is an invalid choice", choice);
+                        for (decimal x = 0; x < 50000000; x++)
+                        {
+                          int y = 0;
+                        }
+                        WriteBox("e", 10, 20, 40, 5);
+                        
+                        break;
+
+                }
+            } while (!Escape);
+        }
+    }

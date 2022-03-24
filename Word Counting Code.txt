@@ -1,0 +1,57 @@
+ static void Main(string[] args)
+        {
+            //string Bodypath = "C:\\C# Test\\PoemBody.txt";
+
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\GettysburgAddress.txt");
+
+
+            //string Appendline = "INSERT INTO TITLE (PoemId,TitleText)" + '\n';
+            //system.IO.File.AppendAllText(Titlepath, Appendline);
+            int Totalwords = 0;
+            int Totalwords2 = 0;
+            int Linenum = 0;
+            string[] Masterlist = new string[500];
+            int[] Mastercount = new int[500];
+            int MasterIndex = 0;
+
+            foreach (string iline in Inputtext)
+            {
+                string line = iline;
+                Linenum++;
+                line = line.ToLower();
+                line = line.Replace(",", string.Empty);
+                line = line.Replace(".", string.Empty);
+                line = line.Replace(";", string.Empty);
+
+                string[] words = line.Split(" ");
+                for (int y = 0; y < words.Length; y++)
+                {
+                    Console.WriteLine("Line:  {0}   Wordnum:  {1}    Word:   {2}", Linenum, y, words[y]);
+                    Totalwords2++;
+                    bool Foundword = false;
+                    for (int g = 0; g < MasterIndex; g++)
+                    {
+                        if (words[y] == Masterlist[g])
+                        {
+                            Mastercount[g]++;
+                            Foundword = true;
+                        }
+                    }
+                    if (!Foundword)
+                    {
+                        MasterIndex++;
+                        Masterlist[MasterIndex] = words[y];
+                        Mastercount[MasterIndex] = 1;
+                    }
+                }
+            }
+            for (int y = 1; y < MasterIndex +1; y++)
+            {
+                Console.WriteLine("Count:  {1}    Word: *{0}*", Masterlist[y], Mastercount[y]);
+                Totalwords += Mastercount[y];
+            }
+            Console.WriteLine("Total words from computation: {0}   Totalwords from raw count: {1}", Totalwords,Totalwords2);
+
+
+
+        }

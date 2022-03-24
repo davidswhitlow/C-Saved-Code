@@ -1,0 +1,35 @@
+using System;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           string nonce = string.Empty;
+            char[] nonceary = {' ', ' ', ' ', ' ' };
+           for (int w =0;w<256;w++)
+            {
+                for (int x=0; x<256; x++)
+                {
+                    for (int y=0;y<256;y++)
+                    {
+                        for (int z=0;z<256;z++)
+                        {
+                            nonceary[0] = (char)w;
+                            nonceary[1] = (char)x;
+                            nonceary[2] = (char)y;
+                            nonceary[3] = (char)z;
+
+                            string g = new string(nonceary);
+                            Console.WriteLine(g);
+
+                        }
+                    }
+                }
+               
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,60 @@
+using System;
+
+namespace NextThing
+{
+    class HelloWorld
+    {
+        static void Main(string[] args)
+        {
+            string s = Console.ReadLine();
+            Console.WriteLine("{0} reversed is \n{1}", s, Reverse(s));
+            Console.WriteLine("{0} split encoded is \n{1}",s, SplitEncode(s));
+            string Es = SplitEncode(s);
+            Console.WriteLine("{0} decoded is \n{1}", Es, SplitUnencode(Es));
+        }
+        public static string Reverse(string s)
+        {
+            string OutString = string.Empty;
+            for (int g = s.Length -1; g > -1; g--)
+            {
+                OutString += s.Substring(g, 1);
+            }
+            return OutString;
+        }
+        public static string SplitEncode(string s)
+        {
+            string Sa = string.Empty;
+            string Sb = string.Empty;
+            int sLen = s.Length;
+            if (sLen % 2 != 0) { s += "*"; }
+            sLen = s.Length; 
+            for (int i = 0; i < sLen; i += 2)
+            {
+                string Xa = s.Substring(i, 1);
+                if (Xa == " ") { Xa = "*"; }
+                Sa += Xa;
+                string Xb = s.Substring(i+1, 1);
+                if (Xb == " ") { Xb = "*"; }
+                Sb += Xb;
+            }
+            Sa += Sb;
+            return Sa;
+        }
+        public static string SplitUnencode(string s)
+        {
+            string Sa = string.Empty;
+            
+            int sLen = s.Length;
+            int sLen2 = sLen / 2;
+            for (int i = 0; i < sLen/2; i++ )
+            {
+                Sa += s.Substring(i, 1);
+                Sa += s.Substring(i + sLen2, 1);
+            }
+            return Sa;
+        }
+
+
+    }
+
+}

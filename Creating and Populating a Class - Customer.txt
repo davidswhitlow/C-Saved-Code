@@ -1,0 +1,85 @@
+using System;
+
+namespace ConsoleApp9
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Customer c1 = new Customer("Whitlow", "David", "Scott", "12-24-1963", "M");
+
+            Console.WriteLine("     Fullname: {0}", c1.Fullname);
+            Console.WriteLine("Date Of Birth: {0}", c1.DateofBirth);
+            Console.WriteLine("       Gender: {0}", c1.Gender);
+            Console.WriteLine("          Age: {0}", c1.Age);
+             
+        }
+
+
+    }
+    public class Customer
+    {
+        public Customer(string ln, string fn, string mn, string dob, string g)
+        {
+            LastName = ln;
+            FirstName = fn;
+            MiddleName = mn;
+            DateofBirth = dob;
+            Gender = g;
+        }
+        public string LastName { set; get; }
+        public string FirstName { set; get; }
+        public string MiddleName { set; get; }
+        public string DateofBirth { set; get; }
+        public string Gender { set; get; }
+        public string Fullname
+        {
+            get
+            {
+                return LastName + ',' + FirstName + ',' + MiddleName;
+            }
+        }
+        public int Age
+        {
+            
+            get
+            {
+                int Age = 0;
+
+                //* Set DOB numeric fields for comparison
+
+                string SYear = DateofBirth.Substring(6, 4);
+                int Year = Int16.Parse(SYear);
+                string SMonth = DateofBirth.Substring(0, 2);
+                int Month = Int16.Parse(SMonth);
+                string SDay = DateofBirth.Substring(3, 2);
+                int Day = Int16.Parse(SDay);
+              
+                //* Get current date and set current date fields for comparison
+
+                DateTime now = DateTime.Today;
+                string Now = now.ToString();
+                string SNmonth = Now.Substring(0, 2);
+                int Nmonth = Int16.Parse(SNmonth);
+                string SNDay = Now.Substring(3, 2);
+                int NDay = Int16.Parse(SNDay);
+                string SNYear = Now.Substring(6, 4);
+                int NYear = Int16.Parse(SNYear);
+
+                //* Make comparison
+
+                if (Month < Nmonth || ((Month == Nmonth) && Day <= NDay)) {
+                    Age = NYear - Year;
+                }   else
+                {
+                    Age = NYear - Year - 1;
+                }
+                
+                return Age;
+            }
+
+        }
+    }
+
+
+}

@@ -1,0 +1,42 @@
+static int Validate(int LowVal, int HighVal)
+        {
+            int Countnum =0;
+            bool valid = false;
+            string validnums = "0123456789";
+
+            while (!valid)
+            {
+                Console.WriteLine("Enter value between {0} and {1}", LowVal, HighVal);
+                string SCountnum = Console.ReadLine();
+
+                bool Goodnum = true;
+                for (int x = 0; x < SCountnum.Length; x++)
+                {
+                    if (!validnums.Contains(SCountnum.Substring(x, 1)))
+                    {
+                        Goodnum = false;
+                    }
+                }
+                if (Goodnum)
+                {
+                    Countnum = int.Parse(SCountnum);
+                    if (Countnum < LowVal || Countnum > HighVal)
+                    {
+                        Console.WriteLine("Number must be between {0} and {1}",LowVal, HighVal);
+
+                    }
+                    else
+                    {
+                        valid = true;
+                        Console.WriteLine("Well done choosing {0}", Countnum);
+                    }
+                }
+            }
+            return Countnum;
+        }
+        static void Main(string[] args)
+        {
+            int Number = Validate(10,100);
+            int NumberSquared = Number * Number;
+            Console.WriteLine("{0} squared is {1}", Number, NumberSquared);
+        }

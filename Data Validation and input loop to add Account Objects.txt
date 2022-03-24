@@ -1,0 +1,69 @@
+using System;
+
+namespace PlayingAround
+{
+    class Program
+    {
+        // ValidateInput accepts a low and a high integer value and returns a valid integer in that range
+        static int ValidateInput(int lv, int hv)         // Validates integer input  lv = lowest value,   hv = highest value
+        {
+            
+            bool Goodnum = false;
+            int Response;
+            do
+            {
+                Console.WriteLine("Choose a number between {0} and {1}", lv, hv);
+                Goodnum = int.TryParse(Console.ReadLine(), out Response);
+                if (Goodnum)
+                {
+                    if (Response < lv || Response > hv)
+                    {
+                        Console.WriteLine("{0} is not between {1} and {2}.  Try again...", Response, lv, hv);
+                        Goodnum = false;
+                    }
+                } else
+                {
+                    Console.WriteLine("Input is not valid. Try again.");
+                }
+            } while (!Goodnum);
+            return Response;
+        }
+        
+        static void Main(string[] args)
+        {
+            string g = string.Empty;
+            int Custindex = 0;
+            Account[] Customers = new Account[1000];            // Define array of customers with a type of Account
+            while (g != "1999999")
+            {                                                   // Loop to add accounts.  It terminates when the account # is 1999999
+              int x = ValidateInput(1000000, 1999999);          // Account number is between 1000000 and 1999999
+              g = x.ToString();
+              int y = ValidateInput(1, 20000);                  // Account balance is between 1 and 20000
+              Account Acct1 = new Account(g, y);
+              Custindex++;                                      // Increment Index and add to array
+              Customers[Custindex] = Acct1;                     
+            }
+            for (int m = 1; m < Custindex ; m++)
+            {
+                Customers[m].GetAccountInfo();
+            }
+            
+            
+        }
+    }
+    class Account    //  Account object -   It contains and account number and an account balance
+    {
+        public string AccountNumber { set; get; }
+        public int AccountBalance { set; get; }
+        public Account (string acctno, int bal)   // Constructor
+        {
+            AccountNumber = acctno;
+
+            AccountBalance = bal;      
+        }
+        public void GetAccountInfo()   // Retreives account number and acount balance
+        {
+            Console.WriteLine("Account No: {0}   Balance: {1}", AccountNumber, AccountBalance);
+        }
+    }
+}

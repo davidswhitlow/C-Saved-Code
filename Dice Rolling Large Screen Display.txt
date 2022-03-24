@@ -1,0 +1,106 @@
+  class Program
+    {
+        static void WriteDice (string [] dice, int pos)
+        {
+            int px = 0;
+            int py = 5;
+            if (pos == 1) { px = 0; }
+            if (pos == 2) { px = 58; }
+            for (int y = 0; y < 22; y++)
+            {
+                
+                Console.SetCursorPosition(px , py);
+                Console.WriteLine(dice[y]);
+                py++;
+            }
+        }
+        static void Main(string[] args)
+        {
+            string[] one = new string[22];
+            string[] two = new string[22];
+            string[] three = new string[22];
+            string[] four = new string[22];
+            string[] five = new string[22];
+            string[] six = new string[22];
+            int ione = -1;
+            int itwo = -1;
+            int ithree = -1;
+            int ifour = -1;
+            int ifive = -1;
+            int isix = -1;
+            int px1 = 5;
+            int px2 = 75;
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\DicePattern.txt");
+            foreach (string dline in Inputtext)
+            {
+                if (dline.Substring(0, 1) == "1") { ione++; one[ione] = dline.Substring(1, 57); }
+                if (dline.Substring(0, 1) == "2") { itwo++; two[itwo] = dline.Substring(1, 57); }
+                if (dline.Substring(0, 1) == "3") { ithree++; three[ithree] = dline.Substring(1, 57); }
+                if (dline.Substring(0, 1) == "4") { ifour++; four[ifour] = dline.Substring(1, 57); }
+                if (dline.Substring(0, 1) == "5") { ifive++; five[ifive] = dline.Substring(1, 57); }
+                if (dline.Substring(0, 1) == "6") { isix++; six[isix] = dline.Substring(1, 57); }
+            }
+            bool exit = false;
+            do
+            {
+                Random x = new Random();
+                Random y = new Random();
+                int d1 = x.Next(1, 7);
+                int d2 = y.Next(1, 7);
+                switch (d1)
+                {
+                    case 1:
+                        WriteDice(one, 1);
+                        break;
+                    case 2:
+                        WriteDice(two, 1);
+                        break;
+                    case 3:
+                        WriteDice(three, 1);
+                        break;
+                    case 4:
+                        WriteDice(four, 1);
+                        break;
+                    case 5:
+                        WriteDice(five, 1);
+                        break;
+                    case 6:
+                        WriteDice(six, 1);
+                        break;
+                    default:
+                        break;
+
+                }
+                switch (d2)
+                {
+                    case 1:
+                        WriteDice(one, 2);
+                        break;
+                    case 2:
+                        WriteDice(two, 2);
+                        break;
+                    case 3:
+                        WriteDice(three, 2);
+                        break;
+                    case 4:
+                        WriteDice(four, 2);
+                        break;
+                    case 5:
+                        WriteDice(five, 2);
+                        break;
+                    case 6:
+                        WriteDice(six, 2);
+                        break;
+                    default:
+                        break;
+
+                }
+                Console.SetCursorPosition(1, 25);
+                char chinput = Console.ReadKey().KeyChar;
+                
+                
+                if (chinput == 'e' || chinput == 'E') { exit = true; }
+            } while (!exit);
+        }
+        
+    }

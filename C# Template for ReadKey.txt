@@ -1,0 +1,5 @@
+ConsoleKeyInfo keyinfo = Console.ReadKey();
+                char c = keyinfo.KeyChar;
+                Option = c.ToString();
+                
+                Moption = Option.ToUpper();
