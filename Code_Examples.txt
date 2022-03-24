@@ -1,0 +1,47 @@
+
+// These are snippets of File management coding in C#
+// 
+// These comments were added 3/24/22  at 3:07PM.
+
+string Titlepath = "C:\\C# Test\\PoemTitle.txt";
+string Bodypath = "C:\\C# Test\\PoemBody.txt";
+
+string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\AllPoems.txt");
+
+
+            string Appendline = "INSERT INTO TITLE (PoemId,TitleText)" + '\n';
+            System.IO.File.AppendAllText(Titlepath, Appendline);
+
+            string Appendline4 = "VALUES" + '\n';
+            System.IO.File.AppendAllText(Titlepath, Appendline4);
+string Bodypath = "C:\\C# Test\\PoemBody.txt";
+
+
+static void Main(string[] args)
+        {
+            string Outpath = "C:\\C# Test\\KandQ.txt";
+            string[] Inputtext = System.IO.File.ReadAllLines(@"C:\C# Test\KingsAndQueens.txt");
+            int TotalYears = 0;
+            foreach (string line in Inputtext)
+            {
+                string Title = line.Substring(0, 7);
+                string Name = line.Substring(8, 16);
+                string Start = line.Substring(24, 4);
+                string End = line.Substring(31, 4);
+                int IntStart = Convert.ToInt32(Start);
+                int IntEnd = Convert.ToInt32(End);
+                int ReignLength = IntEnd - IntStart + 1;
+                TotalYears = TotalYears + ReignLength;
+                string Appendline = "Title: " + Title + "  Name: " + Name + "   Start of Reign: " + Start + "  End of Reign: " + End + " Length: " + ReignLength + "\n";
+                System.IO.File.AppendAllText(Outpath, Appendline);
+            }
+            string Appendline2 = "Total years: " + TotalYears.ToString();
+            System.IO.File.AppendAllText(Outpath, Appendline2);                     
+        }
+
+
+
+
+
+
+
